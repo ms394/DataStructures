@@ -71,6 +71,7 @@ class LinkedList{
         return current
     }
     remove(index){
+        // add conditions 
         const leaderNode = this.traverse(index-1)
         const unwantedNode = leaderNode.next 
         leaderNode.next = unwantedNode.next
@@ -79,12 +80,39 @@ class LinkedList{
 
     printList(){
         const arr = []
-        for(let i=0; i<this.length; i++){
-            arr.push(this.traverse(i).data)
+        let currentNode =  this.head
+        while(currentNode!==null){
+            arr.push(currentNode.data)
+            currentNode = currentNode.next
         }
         console.log(arr)
     }
+
+    reverse() {
+        let prev = null;
+        let next = null;
+        let current = this.head;
+        while(current!==null){
+            next = current.next
+            current.next = prev
+            prev = current
+            current = next
+        }
+        // this.head.next = null
+        this.head = prev
+        
+        return this.printList()
+      }
 }
+
+let myLinkedList = new LinkedList()
+myLinkedList.addNode(1)
+myLinkedList.addNode(2)
+myLinkedList.addNode(3)
+myLinkedList.addNode(3)
+
+myLinkedList.printList()
+myLinkedList.reverse()
 
 
 
